@@ -1,0 +1,77 @@
+import React, { useState } from 'react';
+import { withStyles } from '@material-ui/styles';
+import Select from '@material-ui/core/Select';
+import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+
+const styles = {
+    container : {
+        width: '100%',
+        height: '6vh',
+        display: 'flex',
+        alignItems: 'center',
+        // backgroundColor: 'rgba(0,0,0,0.3)',
+    },
+    logo : {
+        display: 'flex',
+        alignItems: 'center',
+        height: '100%',
+        fontSize: '1.5rem',
+        fontWeight: '700',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        '& span': {
+            padding: '0.3rem 0.7rem'
+        }
+    },
+    sliderContainer: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    slider: {
+        width: '300px',
+        // padding: '0.1rem 0.2rem',
+        margin: '0.4rem 0.4rem'
+    },
+    select: {
+        marginLeft: 'auto',
+    }
+}
+
+function Navbar(props) {
+    const { classes } = props;
+    return (
+        <div className={classes.container}>
+            <div className={classes.logo}>
+                <span>ColorPicker</span>
+            </div>
+            <div className={classes.sliderContainer}>
+                <span>Level: 500</span>
+                <div className={classes.slider}>
+                    <Slider value={500} min={100} max={900} step={100} length={400} 
+                        handleStyle={{marginTop: '-3px'}}
+                        trackStyle={{height: '10px', backgroundColor: 'transparent'}}
+                        railStyle={{height: '8px'}}
+                    />
+                </div>
+            </div>
+            <div  className={classes.select}>
+                <FormControl>
+                    <Select>
+                        <MenuItem>Hex: #ffffff</MenuItem>
+                        <MenuItem>Rgb: Rgb (255, 255, 255)</MenuItem>
+                        <MenuItem>Rgba: Rgba (255, 255, 255, 1)</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
+        </div>
+    )
+}
+
+export default withStyles(styles)(Navbar);
