@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/styles';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const styles = {
     root: {
@@ -43,19 +44,22 @@ const styles = {
     }
 }
 function Colorbox(props) {
+    const [copied, setCopy] = useState(false);
     const { classes, background, name } = props;
     return (
-        <div className={classes.root} style={{backgroundColor: `${background}`}}>
-            
-                <div className={classes.info}>
-                    <span>{name}</span>
-                    <span className={classes.more}>MORE</span>
-                </div>
-                <div className={classes.copyButton}>
-                    <span>COPY</span>
-                </div>
-            
-        </div>
+        <CopyToClipboard text={'copied'} onCopy={() => setCopy(true)}>
+            <div className={classes.root} style={{backgroundColor: `${background}`}}>
+                
+                    <div className={classes.info}>
+                        <span>{name}</span>
+                        <span className={classes.more}>MORE</span>
+                    </div>
+                    <div className={classes.copyButton}>
+                        <span>COPY</span>
+                    </div>
+                
+            </div>
+        </CopyToClipboard>
     )
 }
 
