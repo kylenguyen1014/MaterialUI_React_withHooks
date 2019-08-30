@@ -18,8 +18,9 @@ const styles = {
 }
 
 function Palette(props) {
+    const palette = seedColors[1];
     const { classes } = props;
-    const colorBoxes = seedColors[5].colors.map(color => {
+    const colorBoxes = palette.colors.map(color => {
         return <Colorbox background={color.color} name={color.name}/>
     })
     return (
@@ -28,7 +29,7 @@ function Palette(props) {
             <div className={classes.container}>
                 {colorBoxes}
             </div>
-            <Footer />
+            <Footer paletteName={palette.paletteName} emoji={palette.emoji}/>
         </div>
     )
 }

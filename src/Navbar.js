@@ -33,6 +33,7 @@ const styles = {
     sliderContainer: {
         display: 'flex',
         alignItems: 'center',
+        padding: '0 0.5rem',
     },
     slider: {
         width: '300px',
@@ -41,6 +42,7 @@ const styles = {
     },
     select: {
         marginLeft: 'auto',
+        marginRight: '0.5rem'
     }
 }
 
