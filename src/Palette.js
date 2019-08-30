@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import seedColors from './seedColors';
 import { withStyles } from '@material-ui/styles';
 import Colorbox from './Colorbox';
+import Footer from './Footer';
 
 
 const styles = {
@@ -27,6 +28,7 @@ function Palette(props) {
             <div className={classes.container}>
                 {colorBoxes}
             </div>
+            <Footer />
         </div>
     )
 }
