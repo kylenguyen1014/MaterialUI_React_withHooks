@@ -41,15 +41,68 @@ const styles = {
     },
     more: {
         backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    },
+    animate: {
+        opacity: '0',
+        zIndex: '0',
+        width: '100%',
+        height: '100%',
+        transition: 'transform 0.8s ease-in-out',
+        position: 'absolute',
+        transform: 'scale(0.1)',
+    },
+    show :{
+        transform: 'scale(50)',
+        opacity: '1',
+        zIndex: '10',
+        
+    },
+    copyHeader: {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        bottom: '0',
+        right: '0',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity: '0',
+        fontWeight: '400',
+        fontSize: '2rem',
+        transform: 'scale(0.1)',
+        '& h1':{
+            margin: '0',
+            padding: '1rem 0',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            width: '100%',
+            textAlign: 'center',
+        }
+    },
+    copyMessage : {
+        opacity: '1',
+        zIndex: '20',
+        transform: 'scale(1)',
+        transition: 'all 0.5s 0.3s ease-in-out',
     }
 }
 function Colorbox(props) {
     const [copied, setCopy] = useState(false);
     const { classes, background, name } = props;
+
+    const handleClipBoard = () => {
+        setCopy(true);
+        setTimeout(() => setCopy(false), 1500);
+    }
     return (
-        <CopyToClipboard text={'copied'} onCopy={() => setCopy(true)}>
+        <CopyToClipboard text={background} onCopy={handleClipBoard}>
             <div className={classes.root} style={{backgroundColor: `${background}`}}>
-                
+                    <div className={`${classes.animate} ${copied && classes.show}`} style={{backgroundColor: `${background}`}}/>    
+                    <div className={`${classes.copyHeader} ${copied && classes.copyMessage}`}>
+                        <h1>COPIED</h1>
+                        <p>{background}</p>
+                    </div>
+                    
                     <div className={classes.info}>
                         <span>{name}</span>
                         <span className={classes.more}>MORE</span>
