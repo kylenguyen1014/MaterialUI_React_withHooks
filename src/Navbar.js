@@ -38,7 +38,7 @@ const styles = {
     slider: {
         width: '300px',
         // padding: '0.1rem 0.2rem',
-        margin: '0.4rem 0.4rem'
+        margin: '0.4rem 0.7rem'
     },
     select: {
         marginLeft: 'auto',
@@ -48,15 +48,23 @@ const styles = {
 
 function Navbar(props) {
     const { classes } = props;
+
+    const handleChangeLevel = (value) => {
+        props.changeLevel(value);
+    }
+    const handleChangeType = (e) => {
+        props.changeType(e.target.value);
+    }
+
     return (
         <div className={classes.container}>
             <div className={classes.logo}>
                 <span>ColorPicker</span>
             </div>
             <div className={classes.sliderContainer}>
-                <span>Level: 500</span>
+                <span>Level: {props.level}</span>
                 <div className={classes.slider}>
-                    <Slider value={500} min={100} max={900} step={100} length={400} 
+                    <Slider onChange={handleChangeLevel} value={props.level} min={100} max={900} step={100} 
                         handleStyle={{marginTop: '-3px'}}
                         trackStyle={{height: '10px', backgroundColor: 'transparent'}}
                         railStyle={{height: '8px'}}
@@ -65,10 +73,10 @@ function Navbar(props) {
             </div>
             <div  className={classes.select}>
                 <FormControl>
-                    <Select>
-                        <MenuItem>Hex: #ffffff</MenuItem>
-                        <MenuItem>Rgb: Rgb (255, 255, 255)</MenuItem>
-                        <MenuItem>Rgba: Rgba (255, 255, 255, 1)</MenuItem>
+                    <Select value={props.type} onChange={handleChangeType}>
+                        <MenuItem value={'hex'}>Hex: #FFFFFF</MenuItem>
+                        <MenuItem value={'rgb'}>Rgb: Rgb (255, 255, 255)</MenuItem>
+                        <MenuItem value={'rgba'}>Rgba: Rgba (255, 255, 255, 1)</MenuItem>
                     </Select>
                 </FormControl>
             </div>
