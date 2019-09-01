@@ -54,6 +54,7 @@ function Navbar(props) {
     }
     const handleChangeType = (e) => {
         props.changeType(e.target.value);
+        props.openInfo();
     }
 
     return (
@@ -73,7 +74,7 @@ function Navbar(props) {
             </div>
             <div  className={classes.select}>
                 <FormControl>
-                    <Select value={props.type} onChange={handleChangeType}>
+                    <Select value={props.mode} onChange={handleChangeType}>
                         <MenuItem value={'hex'}>Hex: #FFFFFF</MenuItem>
                         <MenuItem value={'rgb'}>Rgb: Rgb (255, 255, 255)</MenuItem>
                         <MenuItem value={'rgba'}>Rgba: Rgba (255, 255, 255, 1)</MenuItem>
