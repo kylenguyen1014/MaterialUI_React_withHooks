@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/styles';
 import Colorbox from './Colorbox';
 import Footer from './Footer';
 import colorHelper from './colorHelper';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -23,7 +22,7 @@ const styles = {
 }
 
 function Palette(props) {
-    const [level, setLevel] = useState(400);
+    const [level, setLevel] = useState(500);
     const [mode, setMode] = useState('hex');
     const [openMessage, setOpenMessage] = useState(false);
     const palette = colorHelper(seedColors[4]);
