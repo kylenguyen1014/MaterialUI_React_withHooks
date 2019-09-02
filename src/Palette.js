@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import Navbar from './Navbar';
-import seedColors from './seedColors';
+
 import { withStyles } from '@material-ui/styles';
 import Colorbox from './Colorbox';
 import Footer from './Footer';
-import colorHelper from './colorHelper';
+
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -24,10 +24,8 @@ const styles = {
 function Palette(props) {
     const [level, setLevel] = useState(500);
     const [mode, setMode] = useState('hex');
-    const [openMessage, setOpenMessage] = useState(false);
-    const palette = colorHelper(seedColors[4]);
 
-    const { classes } = props;
+    const { classes, palette } = props;
 
     const changeLevel = (level) => {
         setLevel(level);
@@ -37,46 +35,21 @@ function Palette(props) {
         setMode(type);
     }
 
-    const openInfo = () =>{
-        setOpenMessage(true);
-    }
-    const closeInfo = () =>{
-        setOpenMessage(false);
+    const goToSinglePalette = (id) => {
+        props.history.push(`/${palette.id}/${id}`);
     }
 
     const colorBoxes = palette.colors[level].map(color => {
-        return <Colorbox key={color.name} background={color[mode]} name={color.name} />
-    })
+        return <Colorbox key={color.name} id={color.id} background={color[mode]} name={color.name} isFullPalette={true} goToSinglePalette={goToSinglePalette}/>
+    });
     return (
         <div className={classes.root} >
-            <Navbar changeLevel={changeLevel} level={level} changeType={changeType} mode={mode} openInfo={openInfo}/>
+            <Navbar changeLevel={changeLevel} level={level} changeType={changeType} mode={mode} isFullPalette={true}/>
             <div className={classes.container}>
                 {colorBoxes}
             </div>
             <Footer paletteName={palette.paletteName} emoji={palette.emoji}/>
-            <Snackbar
-                anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-                }}
-                open={openMessage}
-                autoHideDuration={3000}
-                onClose={closeInfo}
-                ContentProps={{
-                'aria-describedby': 'message-id',
-                }}
-                message={<span id="message-id">Format Changed</span>}
-                action={[
-                <IconButton
-                    key="close"
-                    aria-label="close"
-                    color="inherit"
-                    onClick={closeInfo}
-                >
-                    <CloseIcon />
-                </IconButton>,
-                ]}
-            />
+            
         </div>
     )
 }

@@ -9,6 +9,7 @@ const styles ={
         borderRadius: '5px',
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
         transition: 'all 0.3s ease-in-out',
+        cursor: 'pointer',
         '&:hover' :{
             transform: 'scale(1.075)',
         }
@@ -33,10 +34,13 @@ const styles ={
 }
 
 function MiniPalette(props) {
-    const { palette, classes } = props;
+    const { palette, id, classes, goToPalette } = props;
 
+    const handleGoToPalette = () => {
+        goToPalette(id)
+    }
     return (
-        <div className={classes.miniPalette}>
+        <div className={classes.miniPalette} onClick={handleGoToPalette}>
             <div className={classes.container}>
                 {palette.colors.map(color => <div className={classes.miniBox} style={{backgroundColor : color.color}} key={color.name}></div>)}
             </div>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/styles';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { Link } from "react-router-dom";
 
 const styles = {
     root: {
         width: '20%',
-        height: '25%',
+        height: props => props.isFullPalette ? '25%' : '50%',
         display: 'inline-block',
         position: 'relative',
         color: 'white',
@@ -37,6 +38,9 @@ const styles = {
         width: '100%',
         '& span':{
             padding: '0.3rem 0.5rem',
+            cursor: 'pointer',
+            zIndex: '4',
+            color: 'inherit',
         }
     },
     more: {
@@ -88,12 +92,17 @@ const styles = {
 }
 function Colorbox(props) {
     const [copied, setCopy] = useState(false);
-    const { classes, background, name } = props;
+    const { classes, background, name, id, isFullPalette, goToSinglePalette } = props;
 
     const handleClipBoard = () => {
         setCopy(true);
         setTimeout(() => setCopy(false), 1500);
     }
+    const handleGoToSinglePalette = (e) => {
+        e.stopPropagation();
+        goToSinglePalette(id);
+    }
+
     return (
         <CopyToClipboard text={background} onCopy={handleClipBoard}>
             <div className={classes.root} style={{backgroundColor: `${background}`}}>
@@ -105,7 +114,7 @@ function Colorbox(props) {
                     
                     <div className={classes.info}>
                         <span>{name}</span>
-                        <span className={classes.more}>MORE</span>
+                        {isFullPalette && <span className={classes.more} onClick={handleGoToSinglePalette}>MORE</span>}
                     </div>
                     <div className={classes.copyButton}>
                         <span>COPY</span>

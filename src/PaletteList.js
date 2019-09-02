@@ -50,6 +50,10 @@ const styles = {
 }
 function PaletteList(props) {
     const { classes } = props;
+
+    const goToPalette = (id) => {
+        props.history.push(`/${id}`);
+    }
     return (
         <div className={classes.root}>
             <div className={classes.main}>
@@ -60,7 +64,7 @@ function PaletteList(props) {
                     </Link>
                 </div>
                 <div className={classes.miniContainer}>
-                    {seedColors.map(palette => <MiniPalette key={palette.id} palette={palette}/>)}
+                    {seedColors.map(palette => <MiniPalette key={palette.id} id={palette.id} palette={palette} goToPalette={goToPalette}/>)}
                 </div>
             </div>
         </div>
