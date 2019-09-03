@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Drawer from '@material-ui/core/Drawer';
-import { withStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -19,7 +18,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-
+import { ChromePicker } from 'react-color';
+import red from '@material-ui/core/colors/red';
 
 const drawerWidth = 400;
 
@@ -88,6 +88,7 @@ const useStyles = makeStyles(theme => ({
 function NewPaletteForm(props) {
     const  classes = useStyles();
     const [open, setOpen] = useState(false);
+    const [currentColor, setCurrentColor] = useState('purple');
 
     function handleDrawerOpen() {
         setOpen(true);
@@ -95,6 +96,10 @@ function NewPaletteForm(props) {
 
     function handleDrawerClose() {
         setOpen(false);
+    }
+
+    function handleColorChange(color){
+        setCurrentColor(color.hex);
     }
 
 
@@ -140,13 +145,30 @@ function NewPaletteForm(props) {
             paper: classes.drawerPaper,
           }}
         >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
+        <div className={classes.drawerHeader}>
+        <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+        </IconButton>
+        </div>
           <Divider />
-          
+        <div>
+            <Typography variant="h6" noWrap>
+                ADD A NEW COLOR
+            </Typography>
+            <div>
+                <Button variant='contained' color='primary'>
+                    RESET 
+                </Button>
+                <Button variant='contained' color='secondary'>
+                    ADD RANDOM
+                </Button>
+            </div>
+            <ChromePicker 
+                width='300px'
+                color={currentColor}
+                onChangeComplete={handleColorChange}
+            />
+        </div>
         </Drawer>
         <main
           className={clsx(classes.content, {
