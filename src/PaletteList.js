@@ -60,7 +60,7 @@ function PaletteList(props) {
                 <div className={classes.heading}>
                     <h1>COLOR PICKER</h1>
                     <Link>
-                        <a> Create Palette</a>
+                        Create Palette
                     </Link>
                 </div>
                 <div className={classes.miniContainer}>

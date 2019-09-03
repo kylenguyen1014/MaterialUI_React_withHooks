@@ -35,7 +35,7 @@ const styles ={
     deleteButton: {
         padding: '5px',
         margin : '3px',
-        borderRadius: '3px',
+        // borderRadius: '3px',
         position: 'absolute',
         top: '0',
         right: '0',
