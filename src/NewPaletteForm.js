@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,6 +19,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { ChromePicker } from 'react-color';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import red from '@material-ui/core/colors/red';
 
 const drawerWidth = 400;
@@ -82,6 +83,25 @@ const useStyles = makeStyles(theme => ({
         '& button':{
             marginRight: '0.2rem',
         }
+    },
+    addColorForm:{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 'auto',
+        '& label':{
+            margin: '0.5rem'
+        },
+        '& button' :{
+            marginTop: '1rem',
+        }
+    },
+    colorFormButton: {
+        margin: '1rem 0',
+        '& button': {
+            margin: '0 0.2rem',
+        },
     }
   }));
 
@@ -89,6 +109,25 @@ function NewPaletteForm(props) {
     const  classes = useStyles();
     const [open, setOpen] = useState(false);
     const [currentColor, setCurrentColor] = useState('purple');
+    const [newColorName, setNewColorName] = useState('');
+    const [colors, setColors] = useState([]);
+
+    useEffect(() => {
+        /// custom rule will have name 'isColorUnique'
+        ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
+            if (colors.every(color => color.name !== newColorName)) {
+                return true;
+            }
+            return false;
+        });
+        /// custom rule will have name 'isColorUnique'
+        ValidatorForm.addValidationRule('isColorValueUnique', (value) => {
+            if (colors.every(color => color.color !== currentColor)) {
+                return true;
+            }
+            return false;
+        });
+    });
 
     function handleDrawerOpen() {
         setOpen(true);
@@ -102,6 +141,18 @@ function NewPaletteForm(props) {
         setCurrentColor(color.hex);
     }
 
+    function handleInputChange(e){
+        setNewColorName(e.target.value);
+    }
+
+    function handleAddColor(){
+        const newColor = {
+            name: newColorName,
+            color: currentColor
+        };
+        setColors([...colors, newColor ]);
+        setNewColorName('');
+    }
 
     return (
         <div className={classes.root}>
@@ -151,15 +202,15 @@ function NewPaletteForm(props) {
         </IconButton>
         </div>
           <Divider />
-        <div>
-            <Typography variant="h6" noWrap>
+        <div className={classes.addColorForm}>
+            <Typography variant="h4" noWrap>
                 ADD A NEW COLOR
             </Typography>
-            <div>
-                <Button variant='contained' color='primary'>
+            <div className={classes.colorFormButton}>
+                <Button variant='contained' color='primary' >
                     RESET 
                 </Button>
-                <Button variant='contained' color='secondary'>
+                <Button variant='contained' color='secondary' disabled={colors.length >=20}>
                     ADD RANDOM
                 </Button>
             </div>
@@ -168,6 +219,23 @@ function NewPaletteForm(props) {
                 color={currentColor}
                 onChangeComplete={handleColorChange}
             />
+            <ValidatorForm onSubmit={handleAddColor} instantValidate={false}>
+                <TextValidator
+                    fullWidth
+                    width='200px'
+                    label='Color Name'
+                    onChange={handleInputChange}
+                    name='newColorName'
+                    validators={['required', 'isColorNameUnique', 'isColorValueUnique']}
+                    errorMessages={['This field is required', 'Color\'s name must be unique', 'This color has been taken']}
+                    value={newColorName}
+                    
+                />
+                <Button variant='contained' style={{backgroundColor: currentColor}} type='submit' disabled={colors.length >=20} fullWidth>
+                    ADD COLOR
+                </Button>
+            </ValidatorForm>
+
         </div>
         </Drawer>
         <main
