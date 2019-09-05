@@ -20,6 +20,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import DraggableBox from './DraggableBox';
 import red from '@material-ui/core/colors/red';
 
 const drawerWidth = 400;
@@ -102,6 +103,10 @@ const useStyles = makeStyles(theme => ({
         '& button': {
             margin: '0 0.2rem',
         },
+    },
+    colorsContainer :{
+        width: '100%',
+        height: '90vh',
     }
   }));
 
@@ -239,12 +244,14 @@ function NewPaletteForm(props) {
         </div>
         </Drawer>
         <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open,
-          })}
+            className={clsx(classes.content, {
+                [classes.contentShift]: open,
+            })}
         >
-          <div className={classes.drawerHeader} />
-         
+            <div className={classes.drawerHeader} />
+            <div className={classes.colorsContainer}>
+                {colors.map(color => <DraggableBox name={color.name} background={color.color}/>)}
+            </div>
         </main>
       </div>
     )
