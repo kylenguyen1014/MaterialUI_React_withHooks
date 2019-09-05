@@ -17,7 +17,7 @@ function App(props) {
 
   return (
     <Switch>
-      <Route exact path='/palette/new' render={(routeProps) => <NewPaletteForm />}/>
+      <Route exact path='/palette/new' render={(routeProps) => <NewPaletteForm {...routeProps}/>}/>
       <Route exact path='/:id/:colorId' render={(routeProps) => <SinglePalette  {...routeProps} palette={colorHelper(findPalette(routeProps.match.params.id))}/>}/>
       <Route exact path='/:id' render={(routeProps) => <Palette  {...routeProps} palette={colorHelper(findPalette(routeProps.match.params.id))}/>}/>
       <Route exact path='/' render={(routeProps) => <PaletteList {...routeProps}/>}/>

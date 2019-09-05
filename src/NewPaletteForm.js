@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import seedColors from './seedColors';
 import Drawer from '@material-ui/core/Drawer';
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -116,6 +117,7 @@ function NewPaletteForm(props) {
     const [currentColor, setCurrentColor] = useState('purple');
     const [newColorName, setNewColorName] = useState('');
     const [colors, setColors] = useState([]);
+    const _allColor = seedColors.map(palette => palette.colors).flat();
 
     useEffect(() => {
         /// custom rule will have name 'isColorUnique'
@@ -159,6 +161,33 @@ function NewPaletteForm(props) {
         setNewColorName('');
     }
 
+    function goBack(){
+        props.history.push('/');
+    }
+
+    function deleteColor(name){
+        setColors(colors.filter(color => color.name !== name))
+    }
+
+    function randomColor(){
+        if (colors.length < 20){
+            let rand = Math.floor(Math.random() * _allColor.length);
+            while(true){
+                let randomName = _allColor[rand].name;
+                let isDupplicate = colors.every(color => color.name !== randomName);
+                if (isDupplicate){
+                    setColors([...colors, _allColor[rand]]);
+                    break;
+                } else {
+                    rand = Math.floor(Math.random() * _allColor.length);
+                }
+            }
+        }
+    }
+    function reset(){
+        setColors([]);
+    }
+
     return (
         <div className={classes.root}>
         <CssBaseline />
@@ -183,7 +212,7 @@ function NewPaletteForm(props) {
               Create New Palette
             </Typography>
             <div className={classes.paletteButton}>
-                <Button variant='contained' color='primary'>
+                <Button variant='contained' color='primary' onClick={goBack}>
                     GO BACK
                 </Button>
                 <Button variant='contained' color='secondary'>
@@ -212,10 +241,10 @@ function NewPaletteForm(props) {
                 ADD A NEW COLOR
             </Typography>
             <div className={classes.colorFormButton}>
-                <Button variant='contained' color='primary' >
+                <Button variant='contained' color='primary' onClick={reset}>
                     RESET 
                 </Button>
-                <Button variant='contained' color='secondary' disabled={colors.length >=20}>
+                <Button variant='contained' color='secondary' disabled={colors.length >=20} onClick={randomColor}>
                     ADD RANDOM
                 </Button>
             </div>
@@ -250,7 +279,7 @@ function NewPaletteForm(props) {
         >
             <div className={classes.drawerHeader} />
             <div className={classes.colorsContainer}>
-                {colors.map(color => <DraggableBox name={color.name} background={color.color}/>)}
+                {colors.map(color => <DraggableBox key={color.name} name={color.name} background={color.color} deleteColor={deleteColor}/>)}
             </div>
         </main>
       </div>

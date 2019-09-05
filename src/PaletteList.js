@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import seedColors from './seedColors';
 import { withStyles } from '@material-ui/styles';
-import { Link } from '@material-ui/core';
+import { Link } from "react-router-dom";
 import MiniPalette from './MiniPalette';
 
 const styles = {
@@ -54,12 +54,13 @@ function PaletteList(props) {
     const goToPalette = (id) => {
         props.history.push(`/${id}`);
     }
+
     return (
         <div className={classes.root}>
             <div className={classes.main}>
                 <div className={classes.heading}>
                     <h1>COLOR PICKER</h1>
-                    <Link>
+                    <Link to='/palette/new'>
                         Create Palette
                     </Link>
                 </div>
