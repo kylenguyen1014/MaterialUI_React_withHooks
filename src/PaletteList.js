@@ -49,7 +49,7 @@ const styles = {
     }
 }
 function PaletteList(props) {
-    const { classes } = props;
+    const { classes, palettes } = props;
 
     const goToPalette = (id) => {
         props.history.push(`/${id}`);
@@ -65,7 +65,7 @@ function PaletteList(props) {
                     </Link>
                 </div>
                 <div className={classes.miniContainer}>
-                    {seedColors.map(palette => <MiniPalette key={palette.id} id={palette.id} palette={palette} goToPalette={goToPalette}/>)}
+                    {palettes.map(palette => <MiniPalette key={palette.id} id={palette.id} palette={palette} goToPalette={goToPalette}/>)}
                 </div>
             </div>
         </div>

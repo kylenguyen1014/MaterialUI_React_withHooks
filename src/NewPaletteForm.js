@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useStyles from './styles/NewPaletteFormStyles';
 import DraggableBoxContainer from './DraggableBoxContainer';
 import seedColors from './seedColors';
 import Drawer from '@material-ui/core/Drawer';
@@ -18,107 +19,33 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { makeStyles } from '@material-ui/core/styles';
+import { Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
 import { Button } from '@material-ui/core';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 // import DraggableBox from './DraggableBox';
 import arrayMove from 'array-move';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import red from '@material-ui/core/colors/red';
 
-const drawerWidth = 400;
 
-const useStyles = makeStyles(theme => ({
-    root: {
-      display: 'flex',
-    },
-    appBar: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-    appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    hide: {
-      display: 'none',
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    drawerHeader: {
-      display: 'flex',
-      alignItems: 'center',
-      padding: theme.spacing(0, 1),
-      ...theme.mixins.toolbar,
-      justifyContent: 'flex-end',
-    },
-    content: {
-      flexGrow: 1,
-    //   padding: theme.spacing(3),
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      marginLeft: -drawerWidth,
-    },
-    contentShift: {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    },
-    paletteButton:{
-        marginLeft: 'auto',
-        '& button':{
-            marginRight: '0.2rem',
-        }
-    },
-    addColorForm:{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 'auto',
-        '& label':{
-            margin: '0.5rem'
-        },
-        '& button' :{
-            marginTop: '1rem',
-        }
-    },
-    colorFormButton: {
-        margin: '1rem 0',
-        '& button': {
-            margin: '0 0.2rem',
-        },
-    },
-    colorsContainer :{
-        width: '100%',
-        height: '90vh',
-    }
-  }));
 
 function NewPaletteForm(props) {
     const  classes = useStyles();
-    const [open, setOpen] = useState(false);
+    const [openDrawer, setOpenDrawer] = useState(false);
     const [currentColor, setCurrentColor] = useState('purple');
     const [newColorName, setNewColorName] = useState('');
     const [colors, setColors] = useState([]);
+    const [paletteName, setPaletteName] = useState('');
+    const [emoji, setEmoji] = useState('');
+    const [openPalette, setOpenPalette] = useState(false);
+    const [openEmoji, setOpenEmoji] = useState(false);
     const _allColor = seedColors.map(palette => palette.colors).flat();
 
     useEffect(() => {
@@ -136,14 +63,28 @@ function NewPaletteForm(props) {
             }
             return false;
         });
+        /// custom rule will have name 'isPaletteUnique'
+        ValidatorForm.addValidationRule('isPaletteUnique', (value) => {
+            if (props.allPaletteName.every(name => name !== paletteName)) {
+                return true;
+            }
+            return false;
+        });
+        /// custom rule will have name 'isPaletteUnique'
+        ValidatorForm.addValidationRule('isSuitableLength', (value) => {
+            if (paletteName.length <= 27) {
+                return true;
+            }
+            return false;
+        });
     });
 
     function handleDrawerOpen() {
-        setOpen(true);
+        setOpenDrawer(true);
     }
 
     function handleDrawerClose() {
-        setOpen(false);
+        setOpenDrawer(false);
     }
 
     function handleColorChange(color){
@@ -154,6 +95,7 @@ function NewPaletteForm(props) {
         setNewColorName(e.target.value);
     }
 
+
     function handleAddColor(){
         const newColor = {
             name: newColorName,
@@ -161,6 +103,31 @@ function NewPaletteForm(props) {
         };
         setColors([...colors, newColor ]);
         setNewColorName('');
+    }
+
+    function handleClosePalette(){
+        setOpenPalette(false);
+    }
+
+    function handleOpenPalette(){
+        setOpenPalette(true);
+    }
+    function handlePaletteChange(e){
+        setPaletteName(e.target.value);
+    }
+    function handleCloseEmoji(){
+        setOpenEmoji(false);
+    }
+
+    function handleOpenEmoji(){
+        setOpenEmoji(true);
+    }
+    function switchToEmoji(){
+        handleClosePalette();
+        handleOpenEmoji();
+    }
+    function choseEmoji(emoji){
+        setEmoji(emoji.native);
     }
 
     function goBack(){
@@ -190,10 +157,18 @@ function NewPaletteForm(props) {
         setColors([]);
     }
 
+    function handleAddPalette(){
+        const newPalette = {
+            paletteName: paletteName,
+            id: paletteName.toLocaleLowerCase().replace(/ /g, '-'),
+            emoji: emoji,
+            colors : colors
+        };
+        props.addPalette(newPalette);
+        props.history.push('/');
+    }
+
     const onSortEnd = ({oldIndex, newIndex}) => {
-        // this.setState(({items}) => ({
-        //   items: arrayMove(items, oldIndex, newIndex),
-        // }));
         setColors(arrayMove(colors, oldIndex, newIndex));
       };
 
@@ -204,7 +179,7 @@ function NewPaletteForm(props) {
             color="default"
             position="fixed"
             className={clsx(classes.appBar, {
-                [classes.appBarShift]: open,
+                [classes.appBarShift]: openDrawer,
             })}
         >
           <Toolbar >
@@ -213,7 +188,7 @@ function NewPaletteForm(props) {
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
+              className={clsx(classes.menuButton, openDrawer && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
@@ -224,9 +199,39 @@ function NewPaletteForm(props) {
                 <Button variant='contained' color='primary' onClick={goBack}>
                     GO BACK
                 </Button>
-                <Button variant='contained' color='secondary'>
+                <Button variant='contained' color='secondary' onClick={handleOpenPalette}>
                     SAVE PALETTE
                 </Button>
+                <Dialog open={openPalette} onClose={handleClosePalette} aria-labelledby="save-palette">
+                    <ValidatorForm onSubmit={switchToEmoji}>
+                        <DialogTitle id="save-palette">Give Palette A Name</DialogTitle>
+                        <DialogContent>
+                        <DialogContentText>
+                            To save this palette, please enter a name here.
+                        </DialogContentText>
+                        <TextValidator
+                            autoFocus
+                            fullWidth
+                            margin="dense"
+                            id="paletteName"
+                            label="Palette's name"
+                            onChange={handlePaletteChange}
+                            name='paletteName'
+                            validators={['required', 'isPaletteUnique']}
+                            errorMessages={['This field is required', 'Palette\'s name must be unique']}
+                            value={paletteName}
+                        />
+                        </DialogContent>
+                        <DialogActions>
+                        <Button onClick={handleClosePalette} color="primary">
+                            Cancel
+                        </Button>
+                        <Button color="primary" type='submit'>
+                            Subscribe
+                        </Button>
+                        </DialogActions>
+                    </ValidatorForm>
+                </Dialog>
             </div>
           </Toolbar>
         </AppBar>
@@ -234,7 +239,7 @@ function NewPaletteForm(props) {
           className={classes.drawer}
           variant="persistent"
           anchor="left"
-          open={open}
+          open={openDrawer}
           classes={{
             paper: classes.drawerPaper,
           }}
@@ -283,14 +288,30 @@ function NewPaletteForm(props) {
         </Drawer>
         <main
             className={clsx(classes.content, {
-                [classes.contentShift]: open,
+                [classes.contentShift]: openDrawer,
             })}
         >
             <div className={classes.drawerHeader} />
             <div className={classes.colorsContainer}>
-                {/* {colors.map(color => <DraggableBox key={color.name} name={color.name} background={color.color} deleteColor={deleteColor}/>)} */}
                 <DraggableBoxContainer axis='xy' distance={20} colors={colors} deleteColor={deleteColor} onSortEnd={onSortEnd}/>
             </div>
+            <Dialog open={openEmoji} onClose={handleCloseEmoji} aria-labelledby="emoji">
+                <DialogTitle id="emoji">Pick an Emoji</DialogTitle>
+                <DialogContent>      
+                    <Picker 
+                        set='emojione'
+                        onSelect={choseEmoji}
+                    />
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleCloseEmoji} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={handleAddPalette} color="primary">
+                    Finish
+                </Button>
+                </DialogActions>
+            </Dialog>
         </main>
       </div>
     )

@@ -7,9 +7,11 @@ const styles = {
         height: '4vh',
         display: 'flex',
         justifyContent: 'flex-end',
+
         alignItems: 'center',
         '& span': {
-            marginRight: '1rem',
+            padding: '0.2rem',
+            marginRight: '0.5rem',
             fontWeight: '700'
         }
     },
@@ -19,7 +21,7 @@ function Footer(props) {
     const { classes, paletteName, emoji } = props;
     return (
         <div className={classes.footer}>
-            <span>{paletteName}</span>
+            <div>{paletteName}</div>
             <span>{emoji}</span>
         </div>
     )
