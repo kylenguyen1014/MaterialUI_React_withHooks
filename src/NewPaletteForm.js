@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DraggableBoxContainer from './DraggableBoxContainer';
 import seedColors from './seedColors';
 import Drawer from '@material-ui/core/Drawer';
 import clsx from 'clsx';
@@ -21,7 +22,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import DraggableBox from './DraggableBox';
+// import DraggableBox from './DraggableBox';
+import arrayMove from 'array-move';
 import red from '@material-ui/core/colors/red';
 
 const drawerWidth = 400;
@@ -188,6 +190,13 @@ function NewPaletteForm(props) {
         setColors([]);
     }
 
+    const onSortEnd = ({oldIndex, newIndex}) => {
+        // this.setState(({items}) => ({
+        //   items: arrayMove(items, oldIndex, newIndex),
+        // }));
+        setColors(arrayMove(colors, oldIndex, newIndex));
+      };
+
     return (
         <div className={classes.root}>
         <CssBaseline />
@@ -279,7 +288,8 @@ function NewPaletteForm(props) {
         >
             <div className={classes.drawerHeader} />
             <div className={classes.colorsContainer}>
-                {colors.map(color => <DraggableBox key={color.name} name={color.name} background={color.color} deleteColor={deleteColor}/>)}
+                {/* {colors.map(color => <DraggableBox key={color.name} name={color.name} background={color.color} deleteColor={deleteColor}/>)} */}
+                <DraggableBoxContainer axis='xy' distance={20} colors={colors} deleteColor={deleteColor} onSortEnd={onSortEnd}/>
             </div>
         </main>
       </div>
