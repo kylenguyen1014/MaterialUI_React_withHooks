@@ -48,7 +48,7 @@ function Palette(props) {
             <div className={classes.container}>
                 {colorBoxes}
             </div>
-            <Footer paletteName={palette.paletteName} emoji={palette.emoji}/>
+            <Footer paletteName={palette.paletteName} emoji={palette.emoji} isFullSize={true}/>
             
         </div>
     )

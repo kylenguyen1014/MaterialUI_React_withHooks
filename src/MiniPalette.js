@@ -82,7 +82,7 @@ function MiniPalette(props) {
             <div className={classes.container}>
                 {palette.colors.map(color => <div className={classes.miniBox} style={{backgroundColor : color.color}} key={color.name}></div>)}
             </div>
-            <Footer paletteName={palette.paletteName} emoji={palette.emoji}/>
+            <Footer paletteName={palette.paletteName} emoji={palette.emoji} isFullSize={false}/>
         </div>
     )
 }
