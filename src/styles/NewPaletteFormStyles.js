@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const drawerWidth = 400;
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,6 +11,7 @@ const useStyles = makeStyles(theme => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      
     },
     appBarShift: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -58,8 +60,9 @@ const useStyles = makeStyles(theme => ({
     paletteButton:{
         marginLeft: 'auto',
         '& button':{
-            marginRight: '0.2rem',
-        }
+            margin: '0.2rem',
+            padding : '0.5rem 0.7rem'
+        },
     },
     addColorForm:{
         display: 'flex',
