@@ -1,4 +1,4 @@
-import down from './ResponsiveHelper';
+import down from '../ResponsiveHelper';
 
 const styles = {
     root: {

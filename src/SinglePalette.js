@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import { withStyles } from '@material-ui/styles';
 import ColorBox from './Colorbox';
 import Footer from './Footer';
-
+import styles from './styles/SinglePaletteStyles';
 
 function SinglePalette(props) {
     const [mode, setMode] = useState('hex');
