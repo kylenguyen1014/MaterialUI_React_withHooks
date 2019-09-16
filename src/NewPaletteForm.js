@@ -227,7 +227,7 @@ function NewPaletteForm(props) {
                             Cancel
                         </Button>
                         <Button color="primary" type='submit'>
-                            Subscribe
+                            Next
                         </Button>
                         </DialogActions>
                     </ValidatorForm>

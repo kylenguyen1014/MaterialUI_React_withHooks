@@ -3,13 +3,15 @@ import { withStyles } from '@material-ui/styles';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { Link } from "react-router-dom";
 import down from './ResponsiveHelper';
+import chroma from 'chroma-js';
+
 const styles = {
     root: {
         width: '20%',
         height: props => props.isFullPalette ? '25%' : '50%',
         display: 'inline-block',
         position: 'relative',
-        color: 'white',
+        color: props => chroma(props.background).luminance() > 0.5 ? 'rgba(0, 0, 0, 0.7)' :'white' ,
         [down('lg')]: {
             width: '25%',
             height: props => props.isFullPalette ? '20%' : '33.33%',
@@ -33,7 +35,7 @@ const styles = {
         alignItems: 'center',
         '& span':{
             opacity: '0',
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            backgroundColor: props => chroma(props.background).luminance() > 0.5 ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)' ,
             padding: '0.3rem 1rem',
             fontWeight: '400',
             transition: 'opacity 0.4s ease-in-out'
@@ -56,7 +58,7 @@ const styles = {
         }
     },
     more: {
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        backgroundColor: props => chroma(props.background).luminance() > 0.5 ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)' ,
     },
     animate: {
         opacity: '0',
@@ -90,7 +92,7 @@ const styles = {
         '& h1':{
             margin: '0',
             padding: '1rem 0',
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            backgroundColor:props => chroma(props.background).luminance() > 0.5 ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)' ,
             width: '100%',
             textAlign: 'center',
         }
