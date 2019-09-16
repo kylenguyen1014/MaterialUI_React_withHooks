@@ -27,6 +27,7 @@ const styles ={
         '&:hover' :{
             transform: 'scale(1.075)',
         },
+        
         // '& button':{
         //     padding: '5px',
         //     backgroundColor: 'rgba(255, 255, 255, 0.5)',

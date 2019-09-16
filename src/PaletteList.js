@@ -9,6 +9,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import down from './ResponsiveHelper';
 
 const styles = {
     root: {
@@ -26,6 +27,15 @@ const styles = {
         // alignItems: 'center',
         marginLeft: 'auto',
         marginRight: 'auto',
+        [down('lg')]: {
+            width: '60%'
+        },
+        [down('md')]: {
+            width: '70%'
+        },
+        [down('xs')]: {
+            width: '80%'
+        },
     },
     heading: {
         display: 'flex',
@@ -46,12 +56,14 @@ const styles = {
         gridTemplateColumns: 'repeat(3, 1fr)',
         gridGap: '5%',
         marginTop: '2rem',
-        // height: '100%',
-        // marginLeft: 'auto',
-        // marginRight: 'auto',
-    },
-    miniBox: {
-        
+        [down('md')]: {
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridGap: '3%',
+        },
+        [down('xs')]: {
+            gridTemplateColumns: 'repeat(1, 1fr)',
+            gridGap: '1%',
+        },
     }
 }
 function PaletteList(props) {
