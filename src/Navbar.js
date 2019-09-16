@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import down from './ResponsiveHelper';
 
 const styles = {
     container : {
@@ -46,9 +47,18 @@ const styles = {
         padding: '0 0.5rem',
     },
     slider: {
-        width: '300px',
+        width: '400px',
         // padding: '0.1rem 0.2rem',
-        margin: '0.4rem 0.7rem'
+        margin: '0.4rem 0.7rem',
+        [down('md')]:{
+            width: '250px',
+        },
+        [down('sm')]:{
+            width: '150px',
+        },
+        [down('xs')]:{
+            width: '100px',
+        },
     },
     select: {
         marginLeft: 'auto',
