@@ -3,6 +3,12 @@ import seedColors from './seedColors';
 import { withStyles } from '@material-ui/styles';
 import { Link } from "react-router-dom";
 import MiniPalette from './MiniPalette';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = {
     root: {
@@ -49,12 +55,20 @@ const styles = {
     }
 }
 function PaletteList(props) {
-    const { classes, palettes } = props;
+    const { classes, palettes, removePalette } = props;
+    // const [openDialog, setOpenDialog] = useState(false);
 
     const goToPalette = (id) => {
         props.history.push(`/${id}`);
     }
 
+    // const handleClickOpen = () => {
+    //     setOpenDialog(true);
+    // }
+
+    // const handleClose = () => {
+    //     setOpenDialog(false);
+    // }
     return (
         <div className={classes.root}>
             <div className={classes.main}>
@@ -65,7 +79,7 @@ function PaletteList(props) {
                     </Link>
                 </div>
                 <div className={classes.miniContainer}>
-                    {palettes.map(palette => <MiniPalette key={palette.id} id={palette.id} palette={palette} goToPalette={goToPalette}/>)}
+                    {palettes.map(palette => <MiniPalette key={palette.id} id={palette.id} palette={palette} goToPalette={goToPalette} removePalette={removePalette}/>)}
                 </div>
             </div>
         </div>

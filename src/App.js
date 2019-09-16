@@ -24,13 +24,28 @@ function App(props) {
     setPalettes([...palettes, palette]);
   }
 
+  const removePalette = (id) => {
+    setPalettes(palettes.filter(palette => palette.id !== id));
+  }
 
   return (
     <Switch>
-      <Route exact path='/palette/new' render={(routeProps) => <NewPaletteForm {...routeProps} allPaletteName={palettes.map(palette => palette.paletteName)} addPalette={addPalette}/>}/>
-      <Route exact path='/:id/:colorId' render={(routeProps) => <SinglePalette  {...routeProps} palette={colorHelper(findPalette(routeProps.match.params.id))}/>}/>
-      <Route exact path='/:id' render={(routeProps) => <Palette  {...routeProps} palette={colorHelper(findPalette(routeProps.match.params.id))}/>}/>
-      <Route exact path='/' render={(routeProps) => <PaletteList {...routeProps} palettes={palettes}/>}/>
+      <Route 
+        exact path='/palette/new' 
+        render={(routeProps) => <NewPaletteForm {...routeProps} allPaletteName={palettes.map(palette => palette.paletteName)} addPalette={addPalette}/>}
+        />
+      <Route 
+        exact path='/:id/:colorId' 
+        render={(routeProps) => <SinglePalette  {...routeProps} palette={colorHelper(findPalette(routeProps.match.params.id))}/>}          
+        />
+      <Route 
+        exact path='/:id' 
+        render={(routeProps) => <Palette  {...routeProps} palette={colorHelper(findPalette(routeProps.match.params.id))}/>}         
+        />
+      <Route 
+        exact path='/' 
+        render={(routeProps) => <PaletteList {...routeProps} palettes={palettes} removePalette={removePalette}/>}       
+      />
     </Switch>
   );
 }

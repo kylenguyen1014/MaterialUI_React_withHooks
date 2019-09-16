@@ -25,6 +25,7 @@ function Palette(props) {
     const [level, setLevel] = useState(500);
     const [mode, setMode] = useState('hex');
 
+
     const { classes, palette } = props;
 
     const changeLevel = (level) => {
