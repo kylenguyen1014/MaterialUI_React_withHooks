@@ -27,27 +27,14 @@ const styles ={
         '&:hover' :{
             transform: 'scale(1.075)',
         },
-        
-        // '& button':{
-        //     padding: '5px',
-        //     backgroundColor: 'rgba(255, 255, 255, 0.5)',
-        //     position: 'absolute',
-        //     top: '0',
-        //     right: '0',
-        //     zIndex: '2',
-        //     opacity: '0',
-        //     color: 'red',
-        // },
         '&:hover button':{
             opacity: '1',
             backgroundColor: 'rgba(255, 255, 255, 0.8)',
-        }
-        
+        }      
     },
     deleteButton: {
         padding: '5px',
         margin : '3px',
-        // borderRadius: '3px',
         position: 'absolute',
         top: '0',
         right: '0',
@@ -66,10 +53,6 @@ const styles ={
         height: '80%',
         margin: '5px auto 0 auto',
     },
-    // miniContainer: {
-    //     width: '100%',
-    //     height: '100%',
-    // },
     miniBox : {
         width: '20%',
         height: '25%',
@@ -81,7 +64,6 @@ const styles ={
     dialogButton :{
         cursor: 'pointer',
         display: 'flex',
-        // justifyContent: 'space-around',
         alignItems: 'center',
         '& button': {
             margin: '0.2rem 0.5rem ',  
@@ -147,12 +129,7 @@ function MiniPalette(props) {
                     </div>
                 </DialogContent>
                 <DialogActions>
-                {/* <Button onClick={handleClose} color="primary">
-                    Disagree
-                </Button>
-                <Button onClick={handleRemovePalette} color="primary" autoFocus>
-                    Agree
-                </Button> */}
+
                 </DialogActions>
             </Dialog>
             <div className={classes.container}>

@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import { withStyles } from '@material-ui/styles';
 import ColorBox from './Colorbox';
 import Footer from './Footer';
+import down from './ResponsiveHelper';
 
 const styles = {
     root: {
@@ -25,6 +26,18 @@ const styles = {
         alignItems: 'center',
         color: 'white',
         cursor: 'pointer',
+        [down('lg')]:{
+            width: '75%',
+            height: '33.33%',
+        },
+        [down('md')]:{
+            width: '50%',
+            height: '20%',
+        },
+        [down('sm')]:{
+            width: '100%',
+            height: '10%',
+        },
         '& span':{
             opacity: '0',
             transition: 'opacity 0.4s ease-in-out',

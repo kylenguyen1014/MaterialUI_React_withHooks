@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { withStyles } from '@material-ui/styles';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { Link } from "react-router-dom";
-
+import down from './ResponsiveHelper';
 const styles = {
     root: {
         width: '20%',
@@ -10,6 +10,18 @@ const styles = {
         display: 'inline-block',
         position: 'relative',
         color: 'white',
+        [down('lg')]: {
+            width: '25%',
+            height: props => props.isFullPalette ? '20%' : '33.33%',
+        },
+        [down('md')]: {
+            width: '50%',
+            height: props => props.isFullPalette ? '10%' : '20%',
+        },
+        [down('sm')]: {
+            width: '100%',
+            height: props => props.isFullPalette ? '5%' : '10%',
+        },
     },
     copyButton :{
         position: 'absolute',
