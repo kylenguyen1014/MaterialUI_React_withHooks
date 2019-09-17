@@ -1,6 +1,15 @@
 import down from '../ResponsiveHelper';
 
 export default {
+    '@global' :{
+        '.fade-exit':{
+            opacity: '1',
+        },
+        '.fade-exit-active':{
+            opacity: '0',
+            transition: 'opacity 0.5s ease-out',
+        }
+    },
     root: {
         margin: '0',
         padding: '0',
@@ -12,8 +21,6 @@ export default {
         width: '50%',
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'center',
-        // alignItems: 'center',
         marginLeft: 'auto',
         marginRight: 'auto',
         [down('lg')]: {
@@ -53,5 +60,17 @@ export default {
             gridTemplateColumns: 'repeat(1, 1fr)',
             gridGap: '1%',
         },
+    },
+    dialogButton :{
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        '& button': {
+            margin: '0.2rem 0.5rem ',  
+        },
+        '&:hover svg':{
+            transform: 'scale(1.3)',
+            transition: 'all 0.3s ease-in-out'
+        }
     }
 }

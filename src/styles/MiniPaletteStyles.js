@@ -44,18 +44,7 @@ const styles ={
         color: 'white',
         marginBottom: '-4px'
     },
-    dialogButton :{
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        '& button': {
-            margin: '0.2rem 0.5rem ',  
-        },
-        '&:hover svg':{
-            transform: 'scale(1.3)',
-            transition: 'all 0.3s ease-in-out'
-        }
-    }
+    
 }
 
 export default styles;

@@ -1,31 +1,46 @@
 import React, { useState } from 'react';
-import seedColors from './seedColors';
 import { withStyles } from '@material-ui/styles';
 import { Link } from "react-router-dom";
 import MiniPalette from './MiniPalette';
-import Button from '@material-ui/core/Button';
+import styles from './styles/PaletteListStyles';
+import IconButton from '@material-ui/core/IconButton';
+import CheckIcon from '@material-ui/icons/Check';
+import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import styles from './styles/PaletteListStyles';
+import { Typography } from '@material-ui/core';
+import { red, green } from '@material-ui/core/colors';
+import {CSSTransition,TransitionGroup,} from 'react-transition-group';
+
+
+
 
 function PaletteList(props) {
     const { classes, palettes, removePalette } = props;
-    // const [openDialog, setOpenDialog] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [id, setId] = useState();
 
     const goToPalette = (id) => {
         props.history.push(`/${id}`);
     }
 
-    // const handleClickOpen = () => {
-    //     setOpenDialog(true);
-    // }
+    const handleClickOpen = (id) => {
+        setOpenDialog(true);
+        setId(id);
+    }
 
-    // const handleClose = () => {
-    //     setOpenDialog(false);
-    // }
+    const handleClose = () => {
+        setOpenDialog(false);
+    }
+
+    const handleRemovePalette = (e) => {
+        setOpenDialog(false);
+        removePalette(id);
+        setId();
+    }
+
     return (
         <div className={classes.root}>
             <div className={classes.main}>
@@ -35,10 +50,55 @@ function PaletteList(props) {
                         Create Palette
                     </Link>
                 </div>
-                <div className={classes.miniContainer}>
-                    {palettes.map(palette => <MiniPalette key={palette.id} id={palette.id} palette={palette} goToPalette={goToPalette} removePalette={removePalette}/>)}
-                </div>
+                <TransitionGroup className={classes.miniContainer}>
+                    {palettes.map(palette =>( 
+                            <CSSTransition
+                                key={palette.id}
+                                timeout={500}
+                                classNames='fade'
+                            >
+                                <MiniPalette 
+                                    key={palette.id} 
+                                    id={palette.id} 
+                                    palette={palette} 
+                                    goToPalette={goToPalette} 
+                                    handleClickOpen={handleClickOpen}
+                                />
+                            </CSSTransition>
+                        )
+                    )}
+                </TransitionGroup>
             </div>
+            <Dialog
+                open={openDialog}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">Delete Palette?</DialogTitle>
+                <DialogContent>
+                    {/* <Divider/> */}
+                    <div onClick={handleRemovePalette} className={classes.dialogButton}>
+                        <IconButton style={{backgroundColor: green[50], color: green[800]}}>
+                            <CheckIcon/>
+                        </IconButton>
+                        <Typography variant='body1' display='inline'>
+                            Yes, delete it!
+                        </Typography>
+                    </div>
+                    <div onClick={handleClose} className={classes.dialogButton}>
+                        <IconButton style={{backgroundColor: red[50], color: red[800]}}>
+                            <CancelOutlinedIcon/>
+                        </IconButton>
+                        <Typography variant='body1' display='inline'>
+                            No, cancel it!
+                        </Typography>
+                    </div>
+                </DialogContent>
+                <DialogActions>
+
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }
