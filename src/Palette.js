@@ -1,25 +1,10 @@
 import React, {useState} from 'react';
 import Navbar from './Navbar';
-
 import { withStyles } from '@material-ui/styles';
 import Colorbox from './Colorbox';
 import Footer from './Footer';
+import styles from './styles/PaletteStyles';
 
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-
-const styles = {
-    root: {
-        // height: '90vh',
-        width: '100%',
-        overflow: 'hidden',
-    },
-    container: {
-        height: '90vh',
-        width: '100%',
-    }
-}
 
 function Palette(props) {
     const [level, setLevel] = useState(500);
