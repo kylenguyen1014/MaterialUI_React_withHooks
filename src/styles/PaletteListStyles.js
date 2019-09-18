@@ -22,9 +22,9 @@ export default {
         margin: '0',
         padding: '0',
         height: '100vh',
-        // background: 'linear-gradient(115deg, rgba(2,0,36,1) 0%, rgba(26,83,124,1) 20%, rgba(9,90,126,1) 50%, rgba(0,212,255,1) 100%)',
         overflow: 'auto',
         background: `url(${bg})`,
+        /* background by SVGBackgrounds.com */
     },
     main : {
         width: '50%',
