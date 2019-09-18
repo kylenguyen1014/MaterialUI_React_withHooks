@@ -1,4 +1,5 @@
 import down from '../ResponsiveHelper';
+import bg from './background.svg';
 
 export default {
     '@global' :{
@@ -21,8 +22,9 @@ export default {
         margin: '0',
         padding: '0',
         height: '100vh',
-        background: 'linear-gradient(115deg, rgba(2,0,36,1) 0%, rgba(26,83,124,1) 20%, rgba(9,90,126,1) 50%, rgba(0,212,255,1) 100%)',
+        // background: 'linear-gradient(115deg, rgba(2,0,36,1) 0%, rgba(26,83,124,1) 20%, rgba(9,90,126,1) 50%, rgba(0,212,255,1) 100%)',
         overflow: 'auto',
+        background: `url(${bg})`,
     },
     main : {
         width: '50%',
@@ -52,6 +54,8 @@ export default {
             background: 'linear-gradient(90deg, rgba(171,46,150,1) 0%, rgba(231,61,98,1) 29%, rgba(47,181,46,0.9207842316614145) 64%, rgba(0,209,255,1) 90%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
+            fontSize: '2.0rem',
+            margin: '1rem'
         }
     },
     miniContainer: {
