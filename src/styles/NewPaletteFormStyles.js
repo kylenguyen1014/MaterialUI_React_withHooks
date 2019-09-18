@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
       }),
     },
     menuButton: {
-      marginRight: theme.spacing(2),
+      marginRight: theme.spacing(0),
     },
     hide: {
       display: 'none',

@@ -10,7 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
@@ -180,7 +180,7 @@ function NewPaletteForm(props) {
               edge="start"
               className={clsx(classes.menuButton, openDrawer && classes.hide)}
             >
-              <MenuIcon />
+              <AddBoxIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
               Create New Palette
