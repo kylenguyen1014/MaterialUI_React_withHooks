@@ -165,6 +165,7 @@ function NewPaletteForm(props) {
             colors : colors
         };
         props.addPalette(newPalette);
+        handleCloseEmoji();
         props.history.push('/');
     }
 

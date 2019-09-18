@@ -9,7 +9,7 @@ function Colorbox(props) {
 
     const handleClipBoard = () => {
         setCopy(true);
-        setTimeout(() => setCopy(false), 1500);
+        setTimeout(() => setCopy(false), 1000);
     }
     const handleGoToSinglePalette = (e) => {
         e.stopPropagation();

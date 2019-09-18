@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
+// import './App.css';
 import Palette from './Palette';
 import colorHelper from './colorHelper';
 import seedColors from './seedColors';
@@ -34,7 +34,7 @@ function App(props) {
     <div className='App'>
       <Route render={({location}) =>
         <TransitionGroup>
-          <CSSTransition key={location.key} timeout={500} classNames ='fade'>
+          <CSSTransition key={location.key} timeout={500} classNames ='page'>
             <Switch location={location}>
               <Route 
                 exact path='/palette/new' 
