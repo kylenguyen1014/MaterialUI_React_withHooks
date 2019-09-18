@@ -13,7 +13,7 @@ function SinglePalette(props) {
         setMode(type);
     }
 
-    const findSinglePalette = (id, colorId) => {
+    const findSinglePalette = (colorId) => {
         let allShade = [];
         for (let color in palette.colors){
             allShade = allShade.concat(palette.colors[color].filter(shade => shade.id === colorId));
@@ -25,7 +25,7 @@ function SinglePalette(props) {
         props.history.goBack();
     }
 
-    const shades = findSinglePalette(palette.id, match.params.colorId);
+    const shades = findSinglePalette(match.params.colorId);
 
     return (
         <div>

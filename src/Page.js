@@ -3,7 +3,7 @@ import './Page.css';
 
 function Page({children}) {
     return (
-        <section classNames='page'>
+        <section >
             {children}
         </section>
     )
