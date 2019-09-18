@@ -2,6 +2,13 @@ import down from '../ResponsiveHelper';
 
 export default {
     '@global' :{
+        '.fade-enter':{
+            opacity: '0',
+        },
+        '.fade-enter-active':{
+            opacity: '1',
+            transition: 'opacity 0.5s ease-out',
+        },
         '.fade-exit':{
             opacity: '1',
         },
@@ -15,7 +22,7 @@ export default {
         padding: '0',
         height: '100vh',
         background: 'linear-gradient(115deg, rgba(2,0,36,1) 0%, rgba(26,83,124,1) 20%, rgba(9,90,126,1) 50%, rgba(0,212,255,1) 100%)',
-        overflow: 'auto'
+        overflow: 'auto',
     },
     main : {
         width: '50%',
@@ -24,10 +31,10 @@ export default {
         marginLeft: 'auto',
         marginRight: 'auto',
         [down('lg')]: {
-            width: '60%'
+            width: '70%'
         },
         [down('md')]: {
-            width: '70%'
+            width: '75%'
         },
         [down('xs')]: {
             width: '80%'
@@ -50,15 +57,15 @@ export default {
     miniContainer: {
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
-        gridGap: '5%',
+        gridGap: '3% 5%',
         marginTop: '2rem',
         [down('md')]: {
             gridTemplateColumns: 'repeat(2, 1fr)',
-            gridGap: '3%',
+            gridGap: '3% 3%',
         },
         [down('xs')]: {
             gridTemplateColumns: 'repeat(1, 1fr)',
-            gridGap: '1%',
+            gridGap: '1% 3%',
         },
     },
     dialogButton :{

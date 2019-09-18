@@ -1,16 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import Footer from './Footer';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CheckIcon from '@material-ui/icons/Check';
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { Typography } from '@material-ui/core';
-import { red, green } from '@material-ui/core/colors';
 import styles from './styles/MiniPaletteStyles';
 
 

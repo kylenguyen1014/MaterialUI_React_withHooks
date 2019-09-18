@@ -6,5 +6,7 @@ export default {
     container: {
         height: '90vh',
         width: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
     }
 }

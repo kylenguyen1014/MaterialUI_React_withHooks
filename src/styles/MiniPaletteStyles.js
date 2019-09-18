@@ -35,6 +35,8 @@ const styles ={
         width: '95%',
         height: '80%',
         margin: '5px auto 0 auto',
+        display: 'flex',
+        flexWrap: 'wrap'
     },
     miniBox : {
         width: '20%',
