@@ -7,15 +7,11 @@ import IconButton from '@material-ui/core/IconButton';
 import CheckIcon from '@material-ui/icons/Check';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Typography } from '@material-ui/core';
 import { red, green } from '@material-ui/core/colors';
 import {CSSTransition,TransitionGroup,} from 'react-transition-group';
-
-
-
 
 function PaletteList(props) {
     const { classes, palettes, removePalette } = props;
@@ -77,7 +73,6 @@ function PaletteList(props) {
             >
                 <DialogTitle id="alert-dialog-title">Delete Palette?</DialogTitle>
                 <DialogContent>
-                    {/* <Divider/> */}
                     <div onClick={handleRemovePalette} className={classes.dialogButton}>
                         <IconButton style={{backgroundColor: green[50], color: green[800]}}>
                             <CheckIcon/>
@@ -95,9 +90,6 @@ function PaletteList(props) {
                         </Typography>
                     </div>
                 </DialogContent>
-                <DialogActions>
-
-                </DialogActions>
             </Dialog>
         </div>
     )

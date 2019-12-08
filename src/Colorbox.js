@@ -23,16 +23,14 @@ function Colorbox(props) {
                     <div className={`${classes.copyHeader} ${copied && classes.copyMessage}`}>
                         <h1>COPIED</h1>
                         <p>{background}</p>
-                    </div>
-                    
+                    </div>                    
                     <div className={classes.info}>
                         <span>{name}</span>
                         {isFullPalette && <span className={classes.more} onClick={handleGoToSinglePalette}>MORE</span>}
                     </div>
                     <div className={classes.copyButton}>
                         <span>COPY</span>
-                    </div>
-                
+                    </div>                
             </div>
         </CopyToClipboard>
     )
